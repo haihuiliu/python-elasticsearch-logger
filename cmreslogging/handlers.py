@@ -87,7 +87,7 @@ class CMRESHandler(logging.Handler):
         :param: index_name the prefix to be used in the index
         :return: A srting containing the elasticsearch indexname used which should include the date.
         """
-        return "{0!s}-{1!s}".format(es_index_name, datetime.datetime.now().strftime('%Y.%m.%d'))
+        return "{0!s}-{1!s}".format(es_index_name, datetime.datetime.now().strftime('%Y-%m-%d'))
 
     @staticmethod
     def _get_weekly_index_name(es_index_name):
@@ -97,7 +97,7 @@ class CMRESHandler(logging.Handler):
         """
         current_date = datetime.datetime.now()
         start_of_the_week = current_date - datetime.timedelta(days=current_date.weekday())
-        return "{0!s}-{1!s}".format(es_index_name, start_of_the_week.strftime('%Y.%m.%d'))
+        return "{0!s}-{1!s}".format(es_index_name, start_of_the_week.strftime('%Y-%m-%d'))
 
     @staticmethod
     def _get_monthly_index_name(es_index_name):
@@ -105,7 +105,7 @@ class CMRESHandler(logging.Handler):
         :param: index_name the prefix to be used in the index
         :return: A srting containing the elasticsearch indexname used which should include the date and specific moth
         """
-        return "{0!s}-{1!s}".format(es_index_name, datetime.datetime.now().strftime('%Y.%m'))
+        return "{0!s}-{1!s}".format(es_index_name, datetime.datetime.now().strftime('%Y-%m'))
 
     @staticmethod
     def _get_yearly_index_name(es_index_name):
@@ -161,7 +161,7 @@ class CMRESHandler(logging.Handler):
         :param flush_frequency_in_sec: A float representing how often and when the buffer will be flushed, even
                     if the buffer_size has not been reached yet
         :param es_index_name: A string with the prefix of the elasticsearch index that will be created. Note a
-                    date with YYYY.MM.dd, ```python_logger``` used by default
+                    date with YYYY-MM-dd, ```python_logger``` used by default
         :param index_name_frequency: Defines what the date used in the postfix of the name would be. available values
                     are selected from the IndexNameFrequency class (IndexNameFrequency.DAILY,
                     IndexNameFrequency.WEEKLY, IndexNameFrequency.MONTHLY, IndexNameFrequency.YEARLY). By default
